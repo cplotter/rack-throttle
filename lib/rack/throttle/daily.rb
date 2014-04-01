@@ -38,7 +38,11 @@ module Rack; module Throttle
     # @param  [Rack::Request] request
     # @return [String]
     def cache_key(request)
-      [super, Time.now.strftime('%Y-%m-%d')].join(':')
+      [super, cache_time_key].join(':')
+    end
+
+    def cache_time_key
+      (Time.respond_to?(:current) ? Time.current : Time.now).strftime('%Y-%m-%d')
     end
   end
 end; end

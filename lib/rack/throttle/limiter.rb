@@ -166,7 +166,7 @@ module Rack; module Throttle
         when request.env.has_key?('HTTP_X_REQUEST_START')
           request.env['HTTP_X_REQUEST_START'].to_f / 1000
         else
-          Time.now.to_f
+          (Time.respond_to?(:current) ? Time.current : Time.now).to_f
       end
     end
 
